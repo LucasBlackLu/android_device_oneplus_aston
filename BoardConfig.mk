@@ -31,6 +31,12 @@ BOARD_VENDOR_RAMDISK_RECOVERY_KERNEL_MODULES_LOAD := $(strip $(shell cat $(DEVIC
 BOOT_KERNEL_MODULES := $(strip $(shell cat $(DEVICE_PATH)/modules.load.recovery $(DEVICE_PATH)/modules.include.vendor_ramdisk))
 SYSTEM_KERNEL_MODULES := $(strip $(shell cat $(DEVICE_PATH)/modules.include.system_dlkm))
 
+# Prebuilt DTBO
+ifeq ($(TARGET_USE_PREBUILT_DTBO),true)
+TARGET_NEEDS_DTBOIMAGE :=
+BOARD_PREBUILT_DTBOIMAGE := $(DEVICE_PATH)-kernel/dtbo.img
+endif
+
 # Partitions
 BOARD_ONEPLUS_DYNAMIC_PARTITIONS_SIZE := 16638803968
 BOARD_SUPER_PARTITION_SIZE := 16642998272
